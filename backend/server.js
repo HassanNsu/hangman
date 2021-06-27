@@ -1,8 +1,10 @@
 const express = require('express');
 const bodyParser = require('body-parser');
+var cors = require('cors');
 
 // create express app
 const app = express();
+app.use(cors());
 
 // parse requests of content-type - application/x-www-form-urlencoded
 app.use(bodyParser.urlencoded({ extended: true }))
@@ -35,6 +37,6 @@ app.get('/', (req, res) => {
 require('./app/routes/game.routes.js')(app);
 
 // listen for requests
-app.listen(3000, () => {
+app.listen(3001 , () => {
     console.log("Server is listening on port 3000");
 });
