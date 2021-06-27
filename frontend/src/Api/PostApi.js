@@ -6,8 +6,8 @@ const PostApi = async (userUid) => {
         headers: {
             "Content-Type": "application/json",
             Accept: "application/json",
-          },
-        body: JSON.stringify({ gameUid: `${userUid}`})
+        },
+        body: JSON.stringify({ gameUid: `${userUid}` })
     };
     console.log(requestOptions);
     const apiData = await fetch('http://localhost:3001/game/', requestOptions)

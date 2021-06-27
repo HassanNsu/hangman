@@ -1,13 +1,13 @@
 import logo from './logo.svg';
 import './App.css';
-import Header from './components/Header';
+import InitialView from './components/InitialView';
 
 
 function App() {
 
   return (
     <>
-      <Header ></Header>
+      <InitialView ></InitialView>
     </>
   );
   

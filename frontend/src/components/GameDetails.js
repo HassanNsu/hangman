@@ -22,7 +22,7 @@ export default function GameDetails(props) {
             <Figure></Figure>
             <Word word = {data.player_word}></Word>
             <Missess misses = {data.missed_words}></Missess>
-            <Guess setData={setData} data={data} ></Guess>
+            <Guess setData={setData} data={data} setGameStatus={props.setGameStatus} misses = {data.missed_words} word = {data.player_word} ></Guess>
             <CurrentCondition status ={data.status} ></CurrentCondition>
         </div>
     )
