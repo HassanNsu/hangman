@@ -61,6 +61,12 @@ export default function Guess(props) {
         }
 
     }
+
+    const ConfirmButton = () => (
+        <Button variant="contained" color="primary" onClick={clickword}>
+            presss
+        </Button>
+    )
     return (
         <div >
             <h1>Guess</h1>
@@ -75,10 +81,9 @@ export default function Guess(props) {
                 onChange={handleChange("userInput")}
                 margin="normal"
                 variant="outlined"
+                style = {{width: 200}}
+                InputProps={{ endAdornment: <ConfirmButton /> }}
             />
-            <Button variant="contained" color="primary" onClick={clickword}>
-                presss
-            </Button>
         </div>
     );
 }

@@ -91,7 +91,7 @@ exports.addGameInput = async (req, res) => {
 
     if(alphabetPosition < 0) {
         missed_alphabets.push(req.body.userInput)
-        if(missed_alphabets.length > 4) {
+        if(missed_alphabets.length > 6) {
             status = GameStatus.LOST
         }
     } else {

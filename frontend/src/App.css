@@ -36,3 +36,10 @@
     transform: rotate(360deg);
   }
 }
+
+.figure-container {
+  fill: transparent;
+  stroke: #282c34;
+  stroke-width: 4px;
+  stroke-linecap: round;
+}
