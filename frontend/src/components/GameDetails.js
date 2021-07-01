@@ -13,7 +13,6 @@ export default function GameDetails(props) {
 
     useEffect(async () => {
         const singleGameData = await GetApi();
-        console.log(await singleGameData);
         setData(singleGameData);
     }, [])
 

@@ -10,7 +10,6 @@ const gameUrl = "http://localhost:3001/game/";
 // Api for Create a new Game
 const CreatePostAPI = async (userUid) => {
     requestOptions.body = JSON.stringify({ gameUid: `${userUid}` });
-    console.log(requestOptions);
     const apiData = await fetch(gameUrl, requestOptions)
         .catch((e) => {
             console.log(e);
@@ -21,7 +20,6 @@ const CreatePostAPI = async (userUid) => {
 // Api for udate the game by adding a alphabet
 const AddInputPostApi = async (word) => {
     requestOptions.body = JSON.stringify(word);
-    console.log(requestOptions);
     const url = gameUrl + localStorage.getItem("gameUid");
     const apiData = await fetch(url, requestOptions)
         .catch((e) => {
