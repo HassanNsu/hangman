@@ -1,12 +1,11 @@
 import React from 'react'
 
 export default function Figure(props) {
-
     const { misses } = props;
     const errors = misses != null && misses.length > 0 ? misses.length : 0;
+    
     return (
         <div style = {{textAlign: "center"}}>
-            {console.log(errors)}
             <svg height="250" width="200" className="figure-container">
                 {/* <!-- Rod --> */}
                 <line x1="60" y1="20" x2="140" y2="20" />

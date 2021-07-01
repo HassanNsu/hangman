@@ -1,11 +1,12 @@
 import React from "react";
 import { TextField } from "@material-ui/core";
 import Button from '@material-ui/core/Button';
-import PostApiWord from '../Api/PostApiWord';
+import { AddInputPostApi } from '../Api/PostApi';
 
 export default function Guess(props) {
     const CHARACTER_LIMIT = 1;
-    const [helpertextWordDuplicate, sethelpertextWordDuplicate] = React.useState("");
+    const { setData, setGameStatus, misses, word } = props;
+    const [helpertextWordDuplicate, sethelpertextWordDuplicate] = React.useState("Enter a Alphabet");
     const [errorShow, setErrorShow] = React.useState(false);
     const [values, setValues] = React.useState({
         userInput: ""
@@ -16,57 +17,50 @@ export default function Guess(props) {
     };
 
     const clickword = async () => {
-
-        console.log(values.userInput);
-
-        console.log("MissesWord --" + props.misses);
-        console.log("CorrectWord --" + props.word);
-        console.log(props.word.indexOf(values.userInput));
         let sameWord = false;
-
         let isLetter = true;
+        let letters = /^[A-Za-z]+$/;
 
-        var letters = /^[A-Za-z]+$/;
-
+        //When user enter the non-alphabet
         if (!values.userInput.match(letters)) {
             isLetter = false;
-        }
-        console.log("isLetter" + isLetter);
-        if (props.word.indexOf(values.userInput) > -1) {
+        } //When user enter the same alphabet from actual word
+        else if (word.indexOf(values.userInput) > -1) {
             sameWord = true;
-        }
-        else if (props.misses.length > 0) {
-            sameWord = props.misses.some((ele) => ele === values.userInput);
-            console.log("Match" + sameWord);
+        } //When user enter the same alphabet from misses word
+        else if (misses.length > 0) {
+            sameWord = misses.some((ele) => ele === values.userInput);
         }
 
-
+        //Error will show when user input same alphabet
         if (sameWord) {
             setErrorShow(true);
-            sethelpertextWordDuplicate("You Already Tried This Word");
+            sethelpertextWordDuplicate("You already tried this word");
         }
 
+        //Error will show when user input non-alphabet
         if (!isLetter) {
             setErrorShow(true);
             sethelpertextWordDuplicate("Please only try a letter");
         }
+
+        //When user input is not a same alphabet and non-alphabet, api will call using user input values
         if (!sameWord && isLetter) {
             sethelpertextWordDuplicate("");
-            const data = await PostApiWord(values);
-            props.setData(await data);
-            props.setGameStatus(await data.status);
-            console.log("Statusssss--" + await data.status);
-            console.log("Misses--" + props.misses.length);
-            console.log(await data);
+            setErrorShow(false);
+            const data = await AddInputPostApi(values);
+            setData(await data);
+            setGameStatus(await data.status);
         }
 
     }
 
     const ConfirmButton = () => (
-        <Button variant="contained" color="primary" onClick={clickword}>
+        <Button variant="contained" color="primary" disabled={!values.userInput} onClick={clickword}>
             Try
         </Button>
     )
+
     return (
         <div >
             <TextField
@@ -80,7 +74,7 @@ export default function Guess(props) {
                 onChange={handleChange("userInput")}
                 margin="normal"
                 variant="outlined"
-                style = {{width: 150}}
+                style={{ width: 150 }}
                 InputProps={{ endAdornment: <ConfirmButton /> }}
             />
         </div>

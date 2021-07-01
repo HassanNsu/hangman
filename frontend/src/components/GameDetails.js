@@ -4,54 +4,35 @@ import Word from './Word';
 import Missess from './Missess';
 import Guess from './Guess';
 import CurrentCondition from './CurrentCondition';
-import { useEffect, useState } from 'react';
-import GetApi from '../Api/GetApi';
+import { useEffect } from 'react';
+import { GetApi } from '../Api/GetApi';
 import Grid from '@material-ui/core/Grid';
-import { makeStyles } from '@material-ui/core/styles';
-
-const useStyles = makeStyles((theme) => ({
-    root: {
-        flexGrow: 1,
-    },
-    paper: {
-        padding: theme.spacing(2),
-        margin: 'auto',
-        maxWidth: 500,
-    },
-    image: {
-        width: 128,
-        height: 128,
-    },
-    img: {
-        margin: 'auto',
-        display: 'block',
-        maxWidth: '100%',
-        maxHeight: '100%',
-    },
-}));
 
 export default function GameDetails(props) {
-    const [data, setData] = useState("");
+    const { data, setData } = props;
 
     useEffect(async () => {
-        const apidata = await GetApi();
-        console.log(await apidata);
-        setData(apidata);
-
+        const singleGameData = await GetApi();
+        console.log(await singleGameData);
+        setData(singleGameData);
     }, [])
 
     return (
         <>
             <Grid container spacing={2}>
-                <Grid item xs={6} md={6} style = {{minWidth: "200px"}}>
+                <Grid item xs={6} md={6} style={{ minWidth: "200px" }}>
                     <Figure misses={data.missed_words} ></Figure>
                 </Grid>
-                <Grid item xs={6} md={6} container style = {{padding: "25px"}}>
+                <Grid item xs={6} md={6} container style={{ padding: "25px" }}>
                     <Grid item xs container direction="column" spacing={2}>
                         <Grid item xs>
                             <Word word={data.player_word}></Word>
                             <Missess misses={data.missed_words}></Missess>
-                            <Guess setData={setData} data={data} setGameStatus={props.setGameStatus} misses={data.missed_words} word={data.player_word} ></Guess>
+                            <Guess setData={setData}
+                                setGameStatus={props.setGameStatus}
+                                misses={data.missed_words}
+                                word={data.player_word}>
+                            </Guess>
                         </Grid>
                     </Grid>
                 </Grid>
