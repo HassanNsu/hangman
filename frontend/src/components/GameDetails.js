@@ -11,9 +11,12 @@ import Grid from '@material-ui/core/Grid';
 export default function GameDetails(props) {
     const { data, setData } = props;
 
-    useEffect(async () => {
-        const singleGameData = await GetApi();
-        setData(singleGameData);
+    useEffect(() => {
+        async function fetch() {
+            const singleGameData = await GetApi();
+            setData(singleGameData);
+        }
+        fetch();
     }, [])
 
     return (
