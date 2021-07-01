@@ -1,12 +1,12 @@
 import React from 'react'
+import Typography from '@material-ui/core/Typography';
 
 export default function Missess(props) {
     console.log(props.misses);
     const {misses} = props;
     return (
         <div>
-            <h1>Missess</h1>
-            <h1>{misses != null && misses.join(",")}</h1>
+            <Typography variant="h5">Missess : {misses != null && misses.join(",")}</Typography>
         </div>
     )
 }

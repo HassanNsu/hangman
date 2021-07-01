@@ -11,6 +11,7 @@ import Paper from '@material-ui/core/Paper';
 import indigo from '@material-ui/core/colors/teal';
 import ButtonBase from '@material-ui/core/ButtonBase';
 import Box from '@material-ui/core/Box';
+import { createMuiTheme, responsiveFontSizes, ThemeProvider } from '@material-ui/core/styles';
 
 const useStyles = makeStyles((theme) => ({
     root: {
@@ -23,6 +24,9 @@ const useStyles = makeStyles((theme) => ({
         backgroundColor: indigo[200],
     },
 }));
+
+let theme = createMuiTheme();
+theme = responsiveFontSizes(theme);
 
 export default function Header() {
 
@@ -64,38 +68,40 @@ export default function Header() {
     return (
 
         <div className={classes.root}>
-            <Paper className={classes.paper}>
-                <Typography variant="subtitle1" gutterBottom>
-                    <h3 align={"center"}>HangMan </h3>
+            <ThemeProvider theme={theme}>
+                <Paper className={classes.paper}>
+                    <Typography variant="h4" gutterBottom>
+                        <h1 align={"center"}>HangMan </h1>
 
-                </Typography>
-                {
-                    gameStatus === 0 && showPlayButton && !gameUID &&
-                    <Box textAlign='center'>
-                        <Button variant="contained" color="primary" onClick={click}>
-                            Lsts Play
-                        </Button>
-                    </Box>
-
-                }
-                {
-                    gameStatus === 0 && showGameDetails && gameUID && <GameDetails setGameStatus={setGameStatus}></GameDetails>
-                }
-                {
-                    (gameStatus === 1 || gameStatus === 2) &&
-                    <>
-                        {localStorage.removeItem("gameUid")}
-                        <Typography variant="h3" component="h2" gutterBottom align={"center"}>
-                            {gameStatus === 1 ? "You win the game" : gameStatus === 2 ? "You lose the game" : ""}
-                        </Typography>
+                    </Typography>
+                    {
+                        gameStatus === 0 && showPlayButton && !gameUID &&
                         <Box textAlign='center'>
-                            <Button variant="contained" color="primary" onClick={clickPlayAgain}>
-                                Play Again
+                            <Button variant="contained" color="primary" onClick={click}>
+                                Lsts Play
                             </Button>
                         </Box>
-                    </>
-                }
-            </Paper>
+
+                    }
+                    {
+                        gameStatus === 0 && showGameDetails && gameUID && <GameDetails setGameStatus={setGameStatus}></GameDetails>
+                    }
+                    {
+                        (gameStatus === 1 || gameStatus === 2) &&
+                        <>
+                            {localStorage.removeItem("gameUid")}
+                            <Typography variant="h3" component="h2" gutterBottom align={"center"}>
+                                {gameStatus === 1 ? "You win the game" : gameStatus === 2 ? "You lose the game" : ""}
+                            </Typography>
+                            <Box textAlign='center'>
+                                <Button variant="contained" color="primary" onClick={clickPlayAgain}>
+                                    Play Again
+                                </Button>
+                            </Box>
+                        </>
+                    }
+                </Paper>
+            </ThemeProvider>
         </div>
     );
 }

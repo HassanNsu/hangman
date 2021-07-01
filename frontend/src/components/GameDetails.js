@@ -43,10 +43,10 @@ export default function GameDetails(props) {
     return (
         <>
             <Grid container spacing={2}>
-                <Grid item>
-                    <Figure misses={data.missed_words}></Figure>
+                <Grid item xs={6} md={6} style = {{minWidth: "200px"}}>
+                    <Figure misses={data.missed_words} ></Figure>
                 </Grid>
-                <Grid item xs={12} sm container>
+                <Grid item xs={6} md={6} container style = {{padding: "25px"}}>
                     <Grid item xs container direction="column" spacing={2}>
                         <Grid item xs>
                             <Word word={data.player_word}></Word>

@@ -5,7 +5,7 @@ export default function Figure(props) {
     const { misses } = props;
     const errors = misses != null && misses.length > 0 ? misses.length : 0;
     return (
-        <div>
+        <div style = {{textAlign: "center"}}>
             {console.log(errors)}
             <svg height="250" width="200" className="figure-container">
                 {/* <!-- Rod --> */}

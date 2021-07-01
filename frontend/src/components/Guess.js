@@ -64,15 +64,14 @@ export default function Guess(props) {
 
     const ConfirmButton = () => (
         <Button variant="contained" color="primary" onClick={clickword}>
-            presss
+            Try
         </Button>
     )
     return (
         <div >
-            <h1>Guess</h1>
             <TextField
                 error={errorShow}
-                label="Enter a word"
+                label="Guess"
                 inputProps={{
                     maxLength: CHARACTER_LIMIT
                 }}
@@ -81,7 +80,7 @@ export default function Guess(props) {
                 onChange={handleChange("userInput")}
                 margin="normal"
                 variant="outlined"
-                style = {{width: 200}}
+                style = {{width: 150}}
                 InputProps={{ endAdornment: <ConfirmButton /> }}
             />
         </div>

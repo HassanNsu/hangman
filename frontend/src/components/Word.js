@@ -1,10 +1,10 @@
 import React from 'react'
+import Typography from '@material-ui/core/Typography';
 
 export default function Word(props) {
     return (
         <div>
-            <h1>Word</h1>
-            <h1>{props.word}</h1>
+            <Typography variant="h5">Word : {props.word}</Typography>
         </div>
     )
 }
